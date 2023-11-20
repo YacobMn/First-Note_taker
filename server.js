@@ -46,7 +46,16 @@ app.post('/api/notes', (req, res) => {
       if(err){
         console.log('error', err)
       }
-      
+      const oldNotes = JSON.parse(data)
+      console.log(oldNotes)
+      oldNotes.push(startNotes)
+      console.log(oldNotes);
+      fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify (oldNotes), (err) => {
+        if(err){
+          console.log('error', err)
+        }
+        res.json(oldNotes)
+      })
     }) 
 })
 
